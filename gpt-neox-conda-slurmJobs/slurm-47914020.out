@@ -1,0 +1,5 @@
+/var/spool/slurmd/job47914020/slurm_script: line 19: ./Write_hostfile.sh: Permission denied
+Traceback (most recent call last):
+  File "deepy.py", line 19, in <module>
+    import deepspeed.launcher.runner
+ModuleNotFoundError: No module named 'deepspeed'

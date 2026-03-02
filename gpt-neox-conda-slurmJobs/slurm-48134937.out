@@ -1,0 +1,27 @@
+[2026-01-26 15:55:14,390] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py:24: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import packaging
+NeoXArgs.from_ymls() ['/global/homes/s/saiedaaz/LLM4VV-finetunning/gpt-neox/configs/qwen2_5_7b.yml']
+INFO:root:NeoXArgs.calculate_derived() Total number of GPUs determined to be: 16
+Traceback (most recent call last):
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/deepy.py", line 41, in <module>
+    main()
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/deepy.py", line 28, in main
+    neox_args = NeoXArgs.consume_deepy_args(input_args)
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py", line 433, in consume_deepy_args
+    neox_args = cls.from_ymls(
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py", line 285, in from_ymls
+    return cls(**config)
+  File "<string>", line 320, in __init__
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py", line 150, in __post_init__
+    self.calculate_derived()
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py", line 1151, in calculate_derived
+    _flash_version = packaging.version.Version(version("flash-attn"))
+  File "/global/homes/s/saiedaaz/.conda/envs/gpt-neox-conda/lib/python3.10/importlib/metadata/__init__.py", line 996, in version
+    return distribution(distribution_name).version
+  File "/global/homes/s/saiedaaz/.conda/envs/gpt-neox-conda/lib/python3.10/importlib/metadata/__init__.py", line 969, in distribution
+    return Distribution.from_name(distribution_name)
+  File "/global/homes/s/saiedaaz/.conda/envs/gpt-neox-conda/lib/python3.10/importlib/metadata/__init__.py", line 548, in from_name
+    raise PackageNotFoundError(name)
+importlib.metadata.PackageNotFoundError: No package metadata was found for flash-attn
+slurmstepd: error: *** JOB 48134937 ON nid001405 CANCELLED AT 2026-01-27T01:29:15 ***

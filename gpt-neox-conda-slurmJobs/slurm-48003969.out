@@ -1,0 +1,16 @@
+/var/spool/slurmd/job48003969/slurm_script: line 23: ./global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/Write_hostfile.sh: No such file or directory
+[2026-01-22 18:52:26,693] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py:24: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import packaging
+NeoXArgs.from_ymls() ['/global/homes/s/saiedaaz/LLM4VV-finetunning/gpt-neox/configs.yml']
+Traceback (most recent call last):
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/deepy.py", line 41, in <module>
+    main()
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/deepy.py", line 28, in main
+    neox_args = NeoXArgs.consume_deepy_args(input_args)
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py", line 433, in consume_deepy_args
+    neox_args = cls.from_ymls(
+  File "/global/u1/s/saiedaaz/LLM4VV-finetunning/gpt-neox/megatron/neox_arguments/arguments.py", line 241, in from_ymls
+    with open(conf_file_name) as conf_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/global/homes/s/saiedaaz/LLM4VV-finetunning/gpt-neox/configs.yml'
+slurmstepd: error: *** JOB 48003969 ON nid002880 CANCELLED AT 2026-01-23T06:52:10 DUE TO TIME LIMIT ***

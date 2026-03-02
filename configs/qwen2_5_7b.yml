@@ -1,0 +1,103 @@
+{
+  "launcher": "slurm",
+  "deepspeed_slurm": true,
+  
+  # finetuning option
+  "load": "/pscratch/sd/s/saiedaaz/LLM-Project/QwenTraining/Qwen2.5-7B/",
+  "save": "/pscratch/sd/s/saiedaaz/LLM-Project/QwenTraining/Qwen2.5-7B-Finetuned",
+  "finetune": true,
+  "data_path": "/pscratch/sd/s/saiedaaz/LLM-Project/QwenTraining/ready_data",
+
+  # parallelism settings
+  "pipe-parallel-size": 1,
+  "model-parallel-size": 2,
+
+  # model settings/ Qwen2.5_7b 
+  "num-layers": 56,  #"max_window_layers": 28 + "num_hidden_layers": 28
+  "hidden-size": 3584,
+  "num-attention-heads": 28,
+  "seq-length": 131072, #"sliding_window": 131072
+  "max-position-embeddings": 131072,
+  "norm": "layernorm",
+  "pos-emb": "rotary",
+  "rotary_pct": 0.25,  #Cannot find it!
+  "no-weight-tying": true,
+  "gpt_j_residual": true,
+  "output_layer_parallelism": "column",
+  "attention-config": [[["flash"], 56]],
+  "scaled-upper-triang-masked-softmax-fusion": true,
+  "bias-gelu-fusion": true,
+
+  # optimizer seetings 
+   "optimizer": {
+     "type": "Adam",
+     "params": {
+       "lr": 0.00012,
+       "betas": [0.9, 0.95],
+       "eps": 1.0e-8
+     }
+   },
+
+   # for all zero_optimization options, see https://www.deepspeed.ai/docs/config-json/#zero-optimizations-for-fp16-training
+   "min_lr": 0.000012,
+
+   "zero_optimization": {
+    "stage": 1,
+    "allgather_partitions": true,
+    "allgather_bucket_size": 1260000000,
+    "overlap_comm": true,
+    "reduce_scatter": true,
+    "reduce_bucket_size": 1260000000,
+    "contiguous_gradients": true,
+    "cpu_offload": false,
+    "load_from_fp32_weights": False, # if checkpoint has fp16/bf16 params
+  },
+
+   # batch / data settings 
+   "train_micro_batch_size_per_gpu": 8,
+   "gradient_accumulation_steps": 2,
+   "data-impl": "mmap",
+
+   # activation checkpointing
+   "checkpoint-activations": true,
+   "checkpoint-num-layers": 1,
+   "partition-activations": true,
+   "synchronize-each-layer": true,
+
+   # regularization
+   "gradient_clipping": 1.0,
+   "weight-decay": 0.1,
+   "hidden-dropout": 0,
+   "attention-dropout": 0,
+
+   # precision settings
+   "fp16": {
+     "fp16": true,
+     "enabled": true,
+     "loss_scale": 0,
+     "loss_scale_window": 1000,
+     "initial_scale_power": 12,
+     "hysteresis": 2,
+     "min_loss_scale": 1
+   },
+  
+  # misc. training settings
+   "train-iters": 143000,
+   "lr-decay-iters": 143000,
+   "distributed-backend": "nccl",
+   "lr-decay-style": "cosine",
+   "warmup": 0.01,
+   "checkpoint-factor": 1000,
+   "extra-save-iters": [0,1,2,4,8,16,32,64,128,256,512],
+   "eval-interval": 143000,
+   "eval-iters": 10,
+
+  # logging
+   "log-interval": 10,
+   "steps_per_print": 10,
+   "wall_clock_breakdown": true,
+
+   "tokenizer_type": "HFTokenizer",
+   "vocab_file": "/pscratch/sd/s/saiedaaz/LLM-Project/QwenTraining/Qwen2.5-7B/vocab.json",
+   "merge_file": "/pscratch/sd/s/saiedaaz/LLM-Project/QwenTraining/Qwen2.5-7B/merges.txt"
+}
